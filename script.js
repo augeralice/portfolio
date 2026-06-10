@@ -10,19 +10,19 @@ const IPHONE_BREAKPOINT = 680;
 let isSyncing = false;
 
 // ===============================
-// SYNC SCROLL COLONNES
+// SYNC SCROLL COLONNES (desktop)
 // ===============================
 function syncFromLeft() {
   if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
   isSyncing = true;
-  rightCol.scrollTop = leftCol.scrollHeight - leftCol.scrollTop - leftCol.clientHeight;
+  rightCol.scrollTop = rightCol.scrollHeight - rightCol.clientHeight - leftCol.scrollTop;
   isSyncing = false;
 }
 
 function syncFromRight() {
   if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
   isSyncing = true;
-  leftCol.scrollTop = leftCol.scrollHeight - rightCol.scrollTop - rightCol.clientHeight;
+  leftCol.scrollTop = leftCol.scrollHeight - leftCol.clientHeight - rightCol.scrollTop;
   isSyncing = false;
 }
 
@@ -36,7 +36,9 @@ window.addEventListener('resize', () => {
   if (window.innerWidth <= IPHONE_BREAKPOINT) {
     leftCol.scrollTop = 0;
     rightCol.scrollTop = 0;
-  } else syncFromLeft();
+  } else {
+    syncFromLeft();
+  }
 });
 
 window.addEventListener('load', () => {
@@ -46,44 +48,75 @@ window.addEventListener('load', () => {
 });
 
 // ===============================
-// BOUTON LOGO → RETOUR ACCUEIL
+// RETOUR ACCUEIL
 // ===============================
 function goHome() {
-  leftCol.scrollTop = 0;
-  rightCol.scrollTop = rightCol.scrollHeight - rightCol.clientHeight;
   mainContainer.classList.remove("hidden");
+  document.getElementById('project-container').scrollTop = 0;
+  document.getElementById('project-media').scrollTop = 0;
+  document.getElementById('project-text').scrollTop = 0;
+   document.getElementById('burger').classList.remove('open');
+  document.getElementById('main-nav').classList.remove('open');
+  // Rétablit la position des colonnes
+  leftCol.scrollTop = 0;
+  if (window.innerWidth > IPHONE_BREAKPOINT) {
+    rightCol.scrollTop = rightCol.scrollHeight - rightCol.clientHeight;
+  }
 }
 
 // ===============================
-// PROJETS
+// BURGER MENU
+// ===============================
+function toggleMenu() {
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('main-nav');
+  burger.classList.toggle('open');
+  nav.classList.toggle('open');
+}
+
+document.querySelectorAll('#main-nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('burger').classList.remove('open');
+    document.getElementById('main-nav').classList.remove('open');
+  });
+});
+
+// ===============================
+// DONNÉES PROJETS
 // ===============================
 const projects = {
-  proj1: { 
-    title: "GRAVURE SUR MESURE - DECANTEUR <i>MANBA</i>  RIEDEL", 
-    subtitle: "Gravure", 
-    desc: "Reproduction fidèle d’une signature originale, adaptée à la forme de l’objet grâce à un pochoir conçu sur mesure.",
-    type: "CALLIGRAPHIE", 
+  proj1: {
+    title: "GRAVURE SUR MESURE - DECANTEUR <i>MANBA</i> RIEDEL",
+    subtitle: "Gravure",
+    desc: "Reproduction fidèle d'une signature originale, adaptée à la forme de l'objet grâce à un pochoir conçu sur mesure.",
+    type: "CALLIGRAPHIE",
     textImage: "image/client-calli(1).webp",
     images: ["image/client-logo(1).webp","image/anim-baton(1).webp","image/anim-baton(1).webp","image/client-logo(4).webp","image/client-logo(2).webp","image/anim-baton(1).webp","image/client-logo(4).webp"]
   },
-  proj2: { 
-    title: "PROJET 2", 
-    subtitle: "Animation", 
-    desc: "Description projet 2", 
-    type: "Animation", 
+  proj2: {
+    title: "PROJET 2",
+    subtitle: "Animation",
+    desc: "Description projet 2",
+    type: "Animation",
     images: ["image/client-illu(1).webp","image/anim-baton(1).webp","image/client-illu(2).webp"]
   },
-  proj3: { 
-    title: "PROJET 3", 
-    subtitle: "Calligraphie", 
-    desc: "Description projet 3", 
-    type: "Illustration", 
+  proj3: {
+    title: "PROJET 3",
+    subtitle: "Calligraphie",
+    desc: "Description projet 3",
+    type: "Illustration",
     images: ["image/client-logo(3).webp","image/client-logo(4).webp"]
-  }
+  },
+  // — À remplir plus tard —
+  proj4: { title: "PROJET 4", subtitle: "", desc: "", type: "", images: ["image/jaaj4.webp"] },
+  proj5: { title: "PROJET 5", subtitle: "", desc: "", type: "", images: ["image/jaaj4.webp"] },
+  proj6: { title: "PROJET 6", subtitle: "", desc: "", type: "", images: ["image/anim-baton(1).webp"] },
+  proj7: { title: "PROJET 7", subtitle: "", desc: "", type: "", images: ["image/client-logo(3).webp"] },
+  proj8: { title: "PROJET 8", subtitle: "", desc: "", type: "", images: ["image/client-illu(4).webp"] }
 };
 
 // ===============================
-// NAVIGATION
+// NAVIGATION PROJETS
 // ===============================
 const projectKeys = Object.keys(projects);
 let currentProjectIndex = 0;
@@ -97,50 +130,57 @@ function showProject(index) {
   document.getElementById('project-title').innerHTML = project.title;
   document.getElementById('project-desc').innerHTML = project.desc;
   document.getElementById('project-subtitle').innerText = project.subtitle;
+  document.getElementById('project-type-label').innerText = project.type;
 
-  // Image texte
+  // Image texte (colonne gauche)
   const textImg = document.getElementById('project-text-image');
   if (project.textImage) {
     textImg.src = project.textImage;
     textImg.style.display = "block";
-  } else textImg.style.display = "none";
+  } else {
+    textImg.style.display = "none";
+  }
 
-  // Images droite – 2 par ligne
+  // Images droite — 2 par ligne
   imagesContainer.innerHTML = "";
   for (let i = 0; i < project.images.length; i += 2) {
     const row = document.createElement("div");
     row.className = "project-row";
-    project.images.slice(i, i+2).forEach((src,j) => {
+    project.images.slice(i, i + 2).forEach((src, j) => {
       const div = document.createElement("div");
       div.classList.add("project-img");
-      div.classList.add((i+j)%4===0 ? "wide" : "square");
+      div.classList.add((i + j) % 4 === 0 ? "wide" : "square");
       div.innerHTML = `<img src="${src}" alt="">`;
       row.appendChild(div);
     });
     imagesContainer.appendChild(row);
   }
 
-  document.getElementById('project-type-label').innerText = project.type;
+  // Remettre le scroll images à zéro
+  document.getElementById('project-media').scrollTop = 0;
+  document.getElementById('project-text').scrollTop = 0;
 
+  // Cacher l'accueil
   mainContainer.classList.add("hidden");
   currentProjectIndex = index;
 }
 
-// Back / Next
+// Flèches prev / next
 document.getElementById('prev-project').addEventListener('click', () => {
-  const prev = (currentProjectIndex-1+projectKeys.length)%projectKeys.length;
+  const prev = (currentProjectIndex - 1 + projectKeys.length) % projectKeys.length;
   showProject(prev);
 });
+
 document.getElementById('next-project').addEventListener('click', () => {
-  const next = (currentProjectIndex+1)%projectKeys.length;
+  const next = (currentProjectIndex + 1) % projectKeys.length;
   showProject(next);
 });
 
-// Click sur projet
+// Click sur une vignette de l'accueil
 document.querySelectorAll('.image-box').forEach(box => {
   box.addEventListener('click', () => {
     const key = box.dataset.project;
     const index = projectKeys.indexOf(key);
-    if(index>=0) showProject(index);
+    if (index >= 0) showProject(index);
   });
 });
