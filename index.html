@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTFOLIO</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PORTFOLIO</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <header>
+
+  <header>
     <div class="logo" onclick="goHome()">ALICE AUGER</div>
-    <nav>
+    <button id="burger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="main-nav">
       <a href="#">PROJETS</a>
       <a href="#">SERVICES</a>
       <a href="#">CONTACT</a>
@@ -34,32 +40,32 @@
 
   <!-- PAGE PROJET -->
   <div id="project-container">
+    <div id="project-content">
+      <div id="project-layout">
 
-      <div class="project-info">
-        <span id="project-subtitle">Description courte du projet</span>
+        <!-- COLONNE GAUCHE : texte + nav -->
+        <div id="project-text">
+          <button id="back-btn" onclick="goHome()">← RETOUR</button>
+          <span id="project-type-label"></span>
+          <h2 id="project-title"></h2>
+          <div class="project-info"><span id="project-subtitle"></span></div>
+          <p id="project-desc"></p>
+          <img id="project-text-image" src="" alt="">
+          <div id="project-text-buttons">
+            <button id="prev-project">❮</button>
+            <button id="next-project">❯</button>
+          </div>
+        </div>
+
+        <!-- COLONNE DROITE : images scrollables -->
+        <div id="project-media">
+          <div id="project-images"></div>
+        </div>
+
       </div>
- 
-
-   <div id="project-content">
-  <div id="project-layout">
-    <div id="project-text">
-      
-      <div id="project-text-buttons">
-  <button id="prev-project">❮</button>
-    <span id="project-type-label"></span>
-  <button id="next-project">❯</button>
-</div>
-      <h2 id="project-title"></h2>
-      <p id="project-desc"></p>
-
-  <img id="project-text-image" src="" alt="">
-
-    </div>
-
-    <div id="project-media">
-      <div id="project-images"></div>
     </div>
   </div>
-</div>
-   </div>
-  </div><script src="script.js"></script></body>
+
+  <script src="script.js"></script>
+</body>
+</html>
