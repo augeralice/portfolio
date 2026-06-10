@@ -1,340 +1,398 @@
- /* ==============FONTS========================== */
- @font-face {
-   font-family: 'Source Sans 3';
-   font-style: normal;
-   font-weight: 400;
-   src: url('fonte/SourceSans3-Regular.woff2') format('woff2'), url('fonte/SourceSans3-Regular.woff') format('woff');
-   font-display: swap;
- }
-
- @font-face {
-   font-family: 'Source Sans 3';
-   font-style: normal;
-   font-weight: 500;
-   src: url('fonte/SourceSans3-Medium.woff2') format('woff2'), url('fonte/SourceSans3-Medium.woff') format('woff');
-   font-display: swap;
- }
-
- @font-face {
-   font-family: 'Source Sans 3';
-   font-style: normal;
-   font-weight: 600;
-   src: url('fonte/SourceSans3-SemiBold.woff2') format('woff2'), url('fonte/SourceSans3-SemiBold.woff') format('woff');
-   font-display: swap;
- }
-
- @font-face {
-   font-family: 'Source Sans 3';
-   font-style: normal;
-   font-weight: 700;
-   src: url('fonte/SourceSans3-Bold.woff2') format('woff2'), url('fonte/SourceSans3-Bold.woff') format('woff');
-   font-display: swap;
- }
- /* ==============BODY========================== */
- * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
-
-html,
-body {
-  height: 100%;
-  overflow-y: auto;
-  font-family: 'Source Sans 3';
+/* ============== VARIABLE GLOBALE ============== */
+:root {
+  --header-h: clamp(40px, 5vh, 60px);
 }
 
+/* ============== FONTS ============== */
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 400;
+  src: url('fonte/SourceSans3-Regular.woff2') format('woff2'), url('fonte/SourceSans3-Regular.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 500;
+  src: url('fonte/SourceSans3-Medium.woff2') format('woff2'), url('fonte/SourceSans3-Medium.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 600;
+  src: url('fonte/SourceSans3-SemiBold.woff2') format('woff2'), url('fonte/SourceSans3-SemiBold.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 700;
+  src: url('fonte/SourceSans3-Bold.woff2') format('woff2'), url('fonte/SourceSans3-Bold.woff') format('woff');
+  font-display: swap;
+}
 
- /* ==============HEADER========================== */
- header {
-   position: fixed;
-   top: 0;
-   width: 100%;
-   height: clamp(40px, 5vh, 60px);
-   background: white;
-   border: 3px solid black;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 0 20px;
-   z-index: 100;
-   font-weight: 700;
-   cursor: default;
- }
+/* ============== RESET ============== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
- header .logo {
-   cursor: pointer;
-   font-size: clamp(16px, 4vw, 22px);
-   white-space: nowrap;
- }
+html, body {
+  height: 100%;
+  overflow: hidden; /* scroll géré par les conteneurs internes — levé sur mobile */
+  font-family: 'Source Sans 3', sans-serif;
+}
 
- header nav a {
-   text-decoration: none;
-   color: black;
-   margin-left: 20px;
-   font-weight: 600;
-   font-size: clamp(14px, 3vw, 20px);
-   white-space: nowrap;
- }
+/* ============== HEADER ============== */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--header-h);
+  background: white;
+  border-bottom: 3px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
+}
 
- header nav a:hover {
-   font-weight: 700;
- }
+header .logo {
+  cursor: pointer;
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: 700;
+  white-space: nowrap;
+}
 
+#main-nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
 
+#main-nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: clamp(14px, 3vw, 20px);
+  white-space: nowrap;
+}
 
- /* ==============MAIN========================== */
- .container {
-   display: flex;
-   flex-direction: row;
-   height: calc(100vh - 30px);
-   margin-top: 30px;
-   position: relative;
-   transition: transform 1.4s cubic-bezier(0.25, 1.15, 0.4, 1);
-   z-index: 1;
-   background: white;
-   border: 2px solid black;
+#main-nav a:hover { font-weight: 700; }
 
+/* Burger — caché sur desktop */
+#burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+}
 
- }
+#burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: black;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+#burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============== PAGE PRINCIPALE ============== */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - var(--header-h));
+  margin-top: var(--header-h);
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.25, 1.15, 0.4, 1);
+  z-index: 10;
+  background: white;
+  border: 2px solid black;
+}
 
 .container.hidden {
   transform: translateY(100vh);
 }
 
- .column {
-   flex: 1;
-   display: flex;
-   flex-direction: column;
-   overflow-y: auto;
- }
-
- .image-box {
-   width: auto;
-      height: 87%;
-   aspect-ratio: 1/1;
-   border: 2px solid black;
-   cursor: pointer;
- }
-
- .image-box img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
-   display: block;
- }
-
- /* ==============PROJECT========================== */
-#project-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height:100%;
-  z-index: 0;
-  overflow-y: auto;
-  scrollbar-width: none;          /* Firefox */
-  -ms-overflow-style: none;       /* IE / Edge ancien */
-  -webkit-overflow-scrolling: touch;
-
-}
-#project-container::-webkit-scrollbar {
-  display: none;                  /* Chrome, Safari, iOS */
-}
-.container::-webkit-scrollbar {
-  display: none;                  /* Chrome, Safari, iOS */
-}
-
- .column::-webkit-scrollbar {
-   display: none;
- }
-
-@media(max-width: 680px) {
-  .container {
-    flex-direction: column;
-    height: auto;           /* ok */
-  overflow-y: auto;           /* nécessaire pour le scroll */
-
-}
-
-
-  .column {
-    width: 100%;
-    height: auto;
-  }
-}
-
-
-
-/* PROJECT CONTENT */
-#project-content {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  position: absolute;   /* <-- changer fixed -> absolute */
-  top: 44px;            /* sous le header */
-  left: 0;
-  right: 0;
-  bottom: 0;            /* remplit l'espace disponible */
-  box-sizing: border-box;
-
-}
-#project-title{
-     font-size: clamp(19px, 3vw, 26px);
-   font-weight: 600;
-   line-height: 1.2;
-   }
-#project-desc{
-     font-size: clamp(16px, 2vw, 20px);
-     padding-top: 10px;
-   line-height: 1.19;
-   }
- .project-info {
-
-   white-space: nowrap;
-   overflow: hidden;
-   font-size: clamp(14px, 2vw, 18px);
- }
-/* layout texte / images */
-#project-layout {
-  display: flex;
-  flex: 1;          /* prend tout l'espace restant */
-  min-height: 0;    /* clé pour scroll interne */
-
-}
-
-/* colonne gauche – texte fixe */
-#project-text {
-
- width: 33.3333%;
-  padding: 0px 20px;
-  box-sizing: border-box;
-  border: 3px solid black;
-overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* texte en haut */
-  align-items: center;         /* centrer horizontalement */
-  min-height:200px;               /* important pour flex */
-  overflow: hidden;            /* éviter scroll interne */
-}
-
-#project-text > h2,
-#project-text > p {
-  width: 100%;
-}
-
-#project-text-image {
-  margin-top: 40px;
-  width: 90%;
-  max-width: 100%;   /* jamais plus large que la colonne */
-  max-height: 70vh;  /* limite hauteur sans dépasser la colonne */
-  object-fit: cover;
-  border: 3px solid black;
-}
-#project-text-buttons {
-width: 50%;
-min-width: 30%;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-
-}
-#project-text-buttons button {
-  background: none;
-  border: none;
-  cursor: pointer;
-    font-weight: 700;
-      font-size: clamp(14px,3vw, 18px);
-      padding: 20px;
-
-}
-
- #project-type-label {
-  text-align: center;
+.column {
   flex: 1;
-  font-weight: 400;
-     font-size: clamp(10px, 3vw, 16px);
-}
-/* colonne droite – images scrollables */
-#project-media {
-  width: 66.6666%;
-  height: 100%;
-  overflow-y: auto;  /* seul le scroll ici */
-  min-height: 0;     /* important pour flex */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-   
 }
-#project-media::-webkit-scrollbar {
-  display: none;
-}
+.column::-webkit-scrollbar { display: none; }
 
-/* images */
-#project-images {
- display: flex;
-  flex-direction: column;
-}
-.project-img {
+.image-box {
   width: 100%;
-  max-height: 700px;
+  height: 80vh;
+  flex-shrink: 0;
+  border: 2px solid black;
+  cursor: pointer;
   overflow: hidden;
 }
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.image-box:hover img { transform: scale(1.03); }
+
+/* ============== PAGE PROJET ============== */
+#project-container {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#project-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#project-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+/* ---- Colonne texte (gauche) ---- */
+#project-text {
+  width: 36%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 20px 0 20px;
+  border-right: 3px solid black;
+  overflow-y: auto;
+  scrollbar-width: none;
+  gap: 14px;
+}
+#project-text::-webkit-scrollbar { display: none; }
+
+#back-btn {
+  display: none;
+  background: none;
+  border: 1.5px solid black;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 12px;
+  letter-spacing: 0.05em;
+}
+
+#project-type-label {
+  font-size: clamp(10px, 1.2vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+#project-title {
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-weight: 700;
+  line-height: 1.25;
+  width: 100%;
+}
+
+.project-info {
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 400;
+  color: #777;
+}
+
+#project-desc {
+  font-size: clamp(12px, 1.3vw, 15px);
+  line-height: 1.65;
+  width: 100%;
+  color: #333;
+}
+
+/* Image texte — masquée partout */
+#project-text-image {
+  display: none !important;
+}
+
+/* Boutons nav collés en bas */
+#project-text-buttons {
+  margin-top: auto;
+  display: flex;
+  width: 100%;
+  border-top: 2px solid black;
+}
+
+#project-text-buttons button {
+  flex: none;
+  width: 60px;
+  background: none;
+  border: none;
+  border-right: 1.5px solid black;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 0;
+  min-height: 44px;
+  color: black;
+  text-align: center;
+}
+
+#project-text-buttons button:last-child { border-right: none; }
+#project-text-buttons button:hover { background: #f5f5f5; }
+
+/* ---- Colonne images (droite) ---- */
+#project-media {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-width: 0;
+}
+#project-media::-webkit-scrollbar { display: none; }
+
+#project-images {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-row { display: flex; }
+
+.project-img {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.project-img.wide { flex: 1.5; }
+.project-img.square { flex: 1; }
+
 .project-img img {
   width: 100%;
-  height: 100%; /* images responsive */
+  height: 100%;
   display: block;
   object-fit: cover;
-     border: 3px solid black;
+  border: 2px solid black;
 }
 
-.project-row {
-  display: flex;
+/* ============== TABLETTE (≤ 978px) ============== */
+@media (max-width: 978px) {
 
-}
-.project-row .project-img {
-  flex: 1;
-}
-
-.project-row .project-img.wide {
-  flex: 1.5;
-}
-
-.project-row .project-img.square {
-  flex: 1;
-}
-/* responsive */
-
-
-@media (max-width: 978px) {  
-  /* colonne droite : images en 1 colonne */
+  #project-content {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100%;
+  }
 
   #project-layout {
     flex-direction: column;
-    height: 100%;
-    }
-  #project-text{
-     width: 100%;
-
+    height: auto;
   }
-#project-text-image {
-    display: none !important; /* force la disparition */
-}
+
+  #project-text {
+    width: 100%;
+    border-right: none;
+    border-bottom: 3px solid black;
+    overflow-y: visible;
+    padding-bottom: 0;
+  }
+
+  #project-text-buttons {
+    margin-top: 16px;
+  }
+
   #project-media {
     width: 100%;
-    height: 100%;  /* tu peux ajuster */
-        overflow-y: auto;
+    height: auto;
+    overflow-y: visible;
   }
 
- 
-    #project-content {
-  top: 40px;
-
-  }
-
+  #back-btn { display: inline-block; }
 }
 
+/* ============== MOBILE (≤ 680px) ============== */
+@media (max-width: 680px) {
 
+  /* Débloque le scroll sur body pour l'accueil */
+  html, body {
+    overflow: auto;
+  }
 
+  /* Burger */
+  #burger { display: flex; }
 
+  #main-nav {
+    display: none;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 3px solid black;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    z-index: 99;
+  }
 
+  #main-nav.open { display: flex; }
+
+  #main-nav a {
+    padding: 16px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+  }
+
+  #main-nav a:last-child { border-bottom: none; }
+
+  /* Accueil : colonnes empilées */
+  .container {
+    flex-direction: column;
+    overflow-y: visible;
+    height: auto;
+    min-height: calc(100vh - var(--header-h));
+  }
+
+  .column {
+    width: 100%;
+    overflow-y: visible;
+    height: auto;
+  }
+
+  /* Projet : project-container scrolle */
+  #project-container {
+    overflow-y: auto;
+  }
+
+  #project-content { height: auto; }
+  #project-layout { overflow-y: visible; }
+  #project-media { overflow-y: visible; }
+
+  /* Images projet : hauteur minimale garantie */
+  .project-img {
+    min-height: 180px;
+  }
+
+  .project-img img {
+    height: 180px;
+  }
+}
