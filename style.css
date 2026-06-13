@@ -132,7 +132,7 @@ header .logo {
 
 .image-box {
   width: 100%;
-  height: 80vh;
+  height: auto;
   flex-shrink: 0;
   border: 2px solid black;
   cursor: pointer;
@@ -140,8 +140,8 @@ header .logo {
 }
 
 .image-box img {
-  width: 100%;
-  height: 100%;
+ width: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -378,21 +378,92 @@ header .logo {
     height: auto;
   }
 
-  /* Projet : project-container scrolle */
+  /* ---- PAGE PROJET sur mobile ---- */
+
+  /* Le conteneur projet prend toute la hauteur et scroll */
   #project-container {
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
-  #project-content { height: auto; }
-  #project-layout { overflow-y: visible; }
-  #project-media { overflow-y: visible; }
+  #project-content {
+    height: auto;
+    min-height: 100%;
+  }
 
-  /* Images projet : hauteur minimale garantie */
+  /* Layout vertical : texte puis images */
+  #project-layout {
+    flex-direction: column;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  /* Colonne texte : compacte, pas de hauteur fixe */
+  #project-text {
+    width: 100%;
+    border-right: none;
+    border-bottom: 3px solid black;
+    overflow-y: visible;
+    padding: 16px 16px 0 16px;
+    gap: 10px;
+  }
+
+  /* Boutons ‹ › collés en bas du bloc texte */
+  #project-text-buttons {
+    margin-top: 16px;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    border-top: 2px solid black;
+  }
+
+  #project-text-buttons button {
+    width: 52px;
+    padding: 12px 0;
+    font-size: 18px;
+  }
+
+  /* Titres et textes bien dimensionnés */
+  #project-type-label { font-size: 11px; }
+  #project-title { font-size: 16px; }
+  .project-info { font-size: 13px; }
+  #project-desc { font-size: 14px; }
+
+  /* Bouton retour visible */
+  #back-btn {
+    display: inline-block;
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  /* Colonne images : pleine largeur, scroll visible */
+  #project-media {
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  /* Images : hauteur proportionnelle, pas fixe */
+  .project-row {
+    flex-direction: column;
+  }
+
   .project-img {
-    min-height: 180px;
+    width: 100%;
+    min-height: 0;
+    flex: none;
+  }
+
+  .project-img.wide,
+  .project-img.square {
+    flex: none;
+    width: 100%;
   }
 
   .project-img img {
-    height: 180px;
+    width: 100%;
+    height: auto;
+    min-height: 220px;
+    object-fit: cover;
   }
 }
