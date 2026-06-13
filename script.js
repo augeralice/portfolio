@@ -1,6 +1,9 @@
 // ===============================
 // VARIABLES
 // ===============================
+// ===============================
+// VARIABLES
+// ===============================
 const leftCol = document.getElementById('left-col');
 const rightCol = document.getElementById('right-col');
 const mainContainer = document.getElementById('main-container');
@@ -15,14 +18,36 @@ let isSyncing = false;
 function syncFromLeft() {
   if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
   isSyncing = true;
-  rightCol.scrollTop = rightCol.scrollHeight - rightCol.clientHeight - leftCol.scrollTop;
+
+  const leftMax = leftCol.scrollHeight - leftCol.clientHeight;
+  const rightMax = rightCol.scrollHeight - rightCol.clientHeight;
+  const ratio = leftCol.scrollTop / leftMax;
+
+  rightCol.scrollTop = rightMax - (ratio * rightMax);
+  isSyncing = false;
+}
+
+function syncFromLeft() {
+  if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
+  isSyncing = true;
+
+  const leftMax = leftCol.scrollHeight - leftCol.clientHeight;
+  const rightMax = rightCol.scrollHeight - rightCol.clientHeight;
+  const ratio = leftCol.scrollTop / leftMax;
+
+  rightCol.scrollTop = rightMax - (ratio * rightMax);
   isSyncing = false;
 }
 
 function syncFromRight() {
   if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
   isSyncing = true;
-  leftCol.scrollTop = leftCol.scrollHeight - leftCol.clientHeight - rightCol.scrollTop;
+
+  const leftMax = leftCol.scrollHeight - leftCol.clientHeight;
+  const rightMax = rightCol.scrollHeight - rightCol.clientHeight;
+  const ratio = rightCol.scrollTop / rightMax;
+
+  leftCol.scrollTop = leftMax - (ratio * leftMax);
   isSyncing = false;
 }
 
@@ -98,6 +123,7 @@ const projects = {
     subtitle: "Animation",
     desc: "Description projet 2",
     type: "Animation",
+    textImage:"mon-site1/image/GLH-9.webp",
     images: ["image/client-illu(1).webp","image/anim-baton(1).webp","image/client-illu(2).webp"]
   },
   proj3: {
