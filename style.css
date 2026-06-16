@@ -247,6 +247,8 @@ top: calc(var(--header-h) + var(--banner-h));
   display: none;
   background: none;
   border: 1.5px solid black;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
   font-weight: 700;
   font-size: 12px;
