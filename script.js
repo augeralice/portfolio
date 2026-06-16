@@ -1,53 +1,59 @@
 // ===============================
 // VARIABLES
 // ===============================
-// ===============================
-// VARIABLES
-// ===============================
+
 const leftCol = document.getElementById('left-col');
 const rightCol = document.getElementById('right-col');
 const mainContainer = document.getElementById('main-container');
 const imagesContainer = document.getElementById('project-images');
 
-const IPHONE_BREAKPOINT = 680;
+const DESKTOP_BREAKPOINT = 1024;
+
 let isSyncing = false;
 
 // ===============================
-// SYNC SCROLL COLONNES (desktop)
+// HELPERS
 // ===============================
-function syncFromLeft() {
-  if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
-  isSyncing = true;
 
-  const leftMax = leftCol.scrollHeight - leftCol.clientHeight;
-  const rightMax = rightCol.scrollHeight - rightCol.clientHeight;
-  const ratio = leftCol.scrollTop / leftMax;
-
-  rightCol.scrollTop = rightMax - (ratio * rightMax);
-  isSyncing = false;
+function isDesktop() {
+  return window.innerWidth > DESKTOP_BREAKPOINT;
 }
 
+// ===============================
+// SCROLL SYNCHRONISÉ (DESKTOP)
+// ===============================
+
 function syncFromLeft() {
-  if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
-  isSyncing = true;
+  if (!isDesktop() || isSyncing) return;
 
   const leftMax = leftCol.scrollHeight - leftCol.clientHeight;
   const rightMax = rightCol.scrollHeight - rightCol.clientHeight;
+
+  if (leftMax <= 0 || rightMax <= 0) return;
+
+  isSyncing = true;
+
   const ratio = leftCol.scrollTop / leftMax;
 
   rightCol.scrollTop = rightMax - (ratio * rightMax);
+
   isSyncing = false;
 }
 
 function syncFromRight() {
-  if (window.innerWidth <= IPHONE_BREAKPOINT || isSyncing) return;
-  isSyncing = true;
+  if (!isDesktop() || isSyncing) return;
 
   const leftMax = leftCol.scrollHeight - leftCol.clientHeight;
   const rightMax = rightCol.scrollHeight - rightCol.clientHeight;
+
+  if (leftMax <= 0 || rightMax <= 0) return;
+
+  isSyncing = true;
+
   const ratio = rightCol.scrollTop / rightMax;
 
   leftCol.scrollTop = leftMax - (ratio * leftMax);
+
   isSyncing = false;
 }
 
@@ -55,57 +61,94 @@ leftCol.addEventListener('scroll', syncFromLeft);
 rightCol.addEventListener('scroll', syncFromRight);
 
 // ===============================
-// RESIZE / LOAD
+// RESIZE
 // ===============================
+
 window.addEventListener('resize', () => {
-  if (window.innerWidth <= IPHONE_BREAKPOINT) {
+
+  if (!isDesktop()) {
+
     leftCol.scrollTop = 0;
     rightCol.scrollTop = 0;
+
   } else {
-    syncFromLeft();
+
+    rightCol.scrollTop =
+      rightCol.scrollHeight - rightCol.clientHeight;
+
   }
+
 });
 
+// ===============================
+// LOAD
+// ===============================
+
 window.addEventListener('load', () => {
-  if (window.innerWidth > IPHONE_BREAKPOINT) {
-    rightCol.scrollTop = rightCol.scrollHeight - rightCol.clientHeight;
+
+  if (isDesktop()) {
+
+    rightCol.scrollTop =
+      rightCol.scrollHeight - rightCol.clientHeight;
+
   }
+
 });
 
 // ===============================
 // RETOUR ACCUEIL
 // ===============================
+
 function goHome() {
-  mainContainer.classList.remove("hidden");
+
+  mainContainer.classList.remove('hidden');
+
   document.getElementById('project-container').scrollTop = 0;
   document.getElementById('project-media').scrollTop = 0;
   document.getElementById('project-text').scrollTop = 0;
-   document.getElementById('burger').classList.remove('open');
+
+  document.getElementById('burger').classList.remove('open');
   document.getElementById('main-nav').classList.remove('open');
-  // Rétablit la position des colonnes
+
   leftCol.scrollTop = 0;
-  if (window.innerWidth > IPHONE_BREAKPOINT) {
-    rightCol.scrollTop = rightCol.scrollHeight - rightCol.clientHeight;
+
+  if (isDesktop()) {
+
+    rightCol.scrollTop =
+      rightCol.scrollHeight - rightCol.clientHeight;
+
+  } else {
+
+    rightCol.scrollTop = 0;
+
   }
+
 }
 
 // ===============================
 // BURGER MENU
 // ===============================
+
 function toggleMenu() {
+
   const burger = document.getElementById('burger');
   const nav = document.getElementById('main-nav');
+
   burger.classList.toggle('open');
   nav.classList.toggle('open');
+
 }
 
 document.querySelectorAll('#main-nav a').forEach(link => {
+
   link.addEventListener('click', () => {
+
     document.getElementById('burger').classList.remove('open');
     document.getElementById('main-nav').classList.remove('open');
-  });
-});
 
+  });
+
+});
 // ===============================
 // DONNÉES PROJETS
 // ===============================
