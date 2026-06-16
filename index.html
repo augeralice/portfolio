@@ -9,7 +9,10 @@
 <body>
 
   <header>
-    <div class="logo" onclick="goHome()">ALICE AUGER</div>
+    <div class="logo-block" onclick="goHome()">
+      <div class="logo">ALICE AUGER</div>
+      <div class="tagline">Gravure & artisanat sur mesure</div>
+    </div>
     <button id="burger" aria-label="Menu" onclick="toggleMenu()">
       <span></span>
       <span></span>
@@ -17,17 +20,20 @@
     </button>
     <nav id="main-nav">
       <a href="#">PROJETS</a>
-      <a href="#">SERVICES</a>
+         <a href="#">SERVICES</a>
+      <a href="#">À PROPOS</a>
       <a href="#">CONTACT</a>
     </nav>
   </header>
-
+  <a href="#" class="services-banner">
+    Disponible pour des prestations sur mesure — gravure événementielle, personnalisation en boutique → Voir les services
+  </a>
   <!-- PAGE PRINCIPALE -->
   <div class="container" id="main-container">
     <div class="column" id="left-col">
-      <div class="image-box" data-project="proj1"><img src="image/client-logo(1).webp" alt="Projet 1"></div>
-      <div class="image-box" data-project="proj2"><img src="image/client-illu(1).webp" alt="Projet 2"></div>
-      <div class="image-box" data-project="proj3"><img src="image/client-calli(1).webp" alt="Projet 3"></div>
+      <div class="image-box" data-project="proj1"><img src="image/vol-1.webp" alt="Projet 1"></div>
+      <div class="image-box" data-project="proj2"><img src="image/GLH-9.webp" alt="Projet 2"></div>
+      <div class="image-box" data-project="proj3"><img src="image/lucie.webp" alt="Projet 3"></div>
       <div class="image-box" data-project="proj4"><img src="image/jaaj4.webp" alt="Projet 4"></div>
     </div>
     <div class="column" id="right-col">
