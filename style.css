@@ -1,6 +1,7 @@
 /* ============== VARIABLE GLOBALE ============== */
 :root {
   --header-h: clamp(40px, 5vh, 60px);
+  --banner-h: 36px;
 }
 
 /* ============== FONTS ============== */
@@ -60,16 +61,67 @@ header .logo {
   white-space: nowrap;
 }
 
+/* Logo + tagline */
+.logo-block {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-block .logo {
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.logo-block .tagline {
+  font-size: clamp(9px, 1.5vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+
+  white-space: nowrap;
+}
+
+/* Bannière services */
+.services-banner {
+  display: block;
+  position: fixed;
+  top: var(--header-h);
+  width: 100%;
+  background: white;
+  border-bottom: 3px solid black;
+  color: black;
+  text-align: center;
+  font-size: clamp(11px, 2vw, 13px);
+  font-weight: 550;
+  letter-spacing: 0.03em;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 99;
+  transition: background 0.2s ease;
+  height: var(--banner-h);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.services-banner:hover {
+  color: #333;
+  background: white;
+  font-weight: 650;
+}
+
 #main-nav {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
 }
 
 #main-nav a {
   text-decoration: none;
   color: black;
-  font-weight: 600;
+  font-weight: 550;
   font-size: clamp(14px, 3vw, 20px);
   white-space: nowrap;
 }
@@ -107,8 +159,8 @@ header .logo {
 .container {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - var(--header-h));
-  margin-top: var(--header-h);
+margin-top: calc(var(--header-h) + var(--banner-h));
+height: calc(100vh - var(--header-h) - var(--banner-h));
   position: relative;
   transition: transform 0.6s cubic-bezier(0.25, 1.15, 0.4, 1);
   z-index: 10;
@@ -137,7 +189,9 @@ header .logo {
   border: 2px solid black;
   cursor: pointer;
   overflow: hidden;
+  position: relative;
 }
+
 
 .image-box img {
  width: 100%;
@@ -152,7 +206,7 @@ header .logo {
 /* ============== PAGE PROJET ============== */
 #project-container {
   position: fixed;
-  top: var(--header-h);
+top: calc(var(--header-h) + var(--banner-h));
   left: 0;
   right: 0;
   bottom: 0;
