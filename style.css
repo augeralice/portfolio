@@ -7,35 +7,48 @@
 /* ============== FONTS ============== */
 @font-face {
   font-family: 'Source Sans 3';
-  font-style: normal; font-weight: 400;
+  font-style: normal;
+  font-weight: 400;
   src: url('fonte/SourceSans3-Regular.woff2') format('woff2'), url('fonte/SourceSans3-Regular.woff') format('woff');
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Source Sans 3';
-  font-style: normal; font-weight: 500;
+  font-style: normal;
+  font-weight: 500;
   src: url('fonte/SourceSans3-Medium.woff2') format('woff2'), url('fonte/SourceSans3-Medium.woff') format('woff');
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Source Sans 3';
-  font-style: normal; font-weight: 600;
+  font-style: normal;
+  font-weight: 600;
   src: url('fonte/SourceSans3-SemiBold.woff2') format('woff2'), url('fonte/SourceSans3-SemiBold.woff') format('woff');
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Source Sans 3';
-  font-style: normal; font-weight: 700;
+  font-style: normal;
+  font-weight: 700;
   src: url('fonte/SourceSans3-Bold.woff2') format('woff2'), url('fonte/SourceSans3-Bold.woff') format('woff');
   font-display: swap;
 }
 
 /* ============== RESET ============== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   height: 100%;
-  overflow: hidden; /* scroll géré par les conteneurs internes — levé sur mobile */
+  overflow: hidden;
+  /* scroll géré par les conteneurs internes — levé sur mobile */
   font-family: 'Source Sans 3', sans-serif;
 }
 
@@ -101,9 +114,9 @@ header .logo {
   z-index: 99;
   transition: background 0.2s ease;
   height: var(--banner-h);
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .services-banner:hover {
@@ -126,7 +139,9 @@ justify-content: center;
   white-space: nowrap;
 }
 
-#main-nav a:hover { font-weight: 700; }
+#main-nav a:hover {
+  font-weight: 700;
+}
 
 /* Burger — caché sur desktop */
 #burger {
@@ -151,16 +166,25 @@ justify-content: center;
   transform-origin: center;
 }
 
-#burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-#burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-#burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+#burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+#burger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+#burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ============== PAGE PRINCIPALE ============== */
 .container {
   display: flex;
   flex-direction: row;
-margin-top: calc(var(--header-h) + var(--banner-h));
-height: calc(100vh - var(--header-h) - var(--banner-h));
+  margin-top: calc(var(--header-h) + var(--banner-h));
+  height: calc(100vh - var(--header-h) - var(--banner-h));
   position: relative;
   transition: transform 0.6s cubic-bezier(0.25, 1.15, 0.4, 1);
   z-index: 10;
@@ -180,7 +204,10 @@ height: calc(100vh - var(--header-h) - var(--banner-h));
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.column::-webkit-scrollbar { display: none; }
+
+.column::-webkit-scrollbar {
+  display: none;
+}
 
 .image-box {
   width: 100%;
@@ -194,19 +221,21 @@ height: calc(100vh - var(--header-h) - var(--banner-h));
 
 
 .image-box img {
- width: 100%;
+  width: 100%;
   height: auto;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
 }
 
-.image-box:hover img { transform: scale(1.03); }
+.image-box:hover img {
+  transform: scale(1.03);
+}
 
 /* ============== PAGE PROJET ============== */
 #project-container {
   position: fixed;
-top: calc(var(--header-h) + var(--banner-h));
+  top: calc(var(--header-h) + var(--banner-h));
   left: 0;
   right: 0;
   bottom: 0;
@@ -241,7 +270,10 @@ top: calc(var(--header-h) + var(--banner-h));
   scrollbar-width: none;
   gap: 14px;
 }
-#project-text::-webkit-scrollbar { display: none; }
+
+#project-text::-webkit-scrollbar {
+  display: none;
+}
 
 #back-btn {
   display: none;
@@ -312,8 +344,13 @@ top: calc(var(--header-h) + var(--banner-h));
   text-align: center;
 }
 
-#project-text-buttons button:last-child { border-right: none; }
-#project-text-buttons button:hover { background: #f5f5f5; }
+#project-text-buttons button:last-child {
+  border-right: none;
+}
+
+#project-text-buttons button:hover {
+  background: #f5f5f5;
+}
 
 /* ---- Colonne images (droite) ---- */
 #project-media {
@@ -324,14 +361,19 @@ top: calc(var(--header-h) + var(--banner-h));
   -ms-overflow-style: none;
   min-width: 0;
 }
-#project-media::-webkit-scrollbar { display: none; }
+
+#project-media::-webkit-scrollbar {
+  display: none;
+}
 
 #project-images {
   display: flex;
   flex-direction: column;
 }
 
-.project-row { display: flex; }
+.project-row {
+  display: flex;
+}
 
 .project-img {
   flex: 1;
@@ -339,8 +381,13 @@ top: calc(var(--header-h) + var(--banner-h));
   min-width: 0;
 }
 
-.project-img.wide { flex: 1.5; }
-.project-img.square { flex: 1; }
+.project-img.wide {
+  flex: 1.5;
+}
+
+.project-img.square {
+  flex: 1;
+}
 
 .project-img img {
   width: 100%;
@@ -350,56 +397,27 @@ top: calc(var(--header-h) + var(--banner-h));
   border: 2px solid black;
 }
 
-/* ============== TABLETTE (≤ 978px) ============== */
-@media (max-width: 978px) {
+/* ==========================================
+   TABLETTE + MOBILE (≤ 1024px)
+========================================== */
 
-  #project-content {
-    overflow-y: auto;
-    height: auto;
-    min-height: 100%;
-  }
+@media (max-width: 1024px) {
 
-  #project-layout {
-    flex-direction: column;
-    height: auto;
-  }
-
-  #project-text {
-    width: 100%;
-    border-right: none;
-    border-bottom: 3px solid black;
-    overflow-y: visible;
-    padding-bottom: 0;
-  }
-
-  #project-text-buttons {
-    margin-top: 16px;
-  }
-
-  #project-media {
-    width: 100%;
-    height: auto;
-    overflow-y: visible;
-  }
-
-  #back-btn { display: inline-block; }
-}
-
-/* ============== MOBILE (≤ 680px) ============== */
-@media (max-width: 680px) {
-
-  /* Débloque le scroll sur body pour l'accueil */
-  html, body {
+  html,
+  body {
     overflow: auto;
   }
 
-  /* Burger */
-  #burger { display: flex; }
+  /* ---------- HEADER ---------- */
+
+  #burger {
+    display: flex;
+  }
 
   #main-nav {
     display: none;
     position: fixed;
-    top: var(--header-h);
+    top: calc(var(--header-h) + var(--banner-h));
     left: 0;
     right: 0;
     background: white;
@@ -407,10 +425,12 @@ top: calc(var(--header-h) + var(--banner-h));
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    z-index: 99;
+    z-index: 101;
   }
 
-  #main-nav.open { display: flex; }
+  #main-nav.open {
+    display: flex;
+  }
 
   #main-nav a {
     padding: 16px 20px;
@@ -418,25 +438,39 @@ top: calc(var(--header-h) + var(--banner-h));
     border-bottom: 1px solid #eee;
   }
 
-  #main-nav a:last-child { border-bottom: none; }
+  #main-nav a:last-child {
+    border-bottom: none;
+  }
 
-  /* Accueil : colonnes empilées */
+  /* ---------- ACCUEIL ---------- */
+
   .container {
     flex-direction: column;
-    overflow-y: visible;
+    overflow: visible;
     height: auto;
-    min-height: calc(100vh - var(--header-h));
+    min-height: calc(100vh - var(--header-h) - var(--banner-h));
   }
 
   .column {
     width: 100%;
-    overflow-y: visible;
     height: auto;
+    overflow: visible;
   }
 
-  /* ---- PAGE PROJET sur mobile ---- */
+  .image-box {
+    width: 100%;
+      max-width: 850px;
+    margin: 0 auto;
+  }
 
-  /* Le conteneur projet prend toute la hauteur et scroll */
+  .image-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ---------- PAGE PROJET ---------- */
+
   #project-container {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -447,73 +481,48 @@ top: calc(var(--header-h) + var(--banner-h));
     min-height: 100%;
   }
 
-  /* Layout vertical : texte puis images */
   #project-layout {
     flex-direction: column;
     height: auto;
-    overflow-y: visible;
   }
 
-  /* Colonne texte : compacte, pas de hauteur fixe */
   #project-text {
     width: 100%;
     border-right: none;
     border-bottom: 3px solid black;
-    overflow-y: visible;
-    padding: 16px 16px 0 16px;
+    overflow: visible;
+    padding: 16px;
     gap: 10px;
   }
 
-  /* Boutons ‹ › collés en bas du bloc texte */
+  #project-media {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
   #project-text-buttons {
     margin-top: 16px;
     position: sticky;
     bottom: 0;
     background: white;
-    border-top: 2px solid black;
   }
 
-  #project-text-buttons button {
-    width: 52px;
-    padding: 12px 0;
-    font-size: 18px;
-  }
-
-  /* Titres et textes bien dimensionnés */
-  #project-type-label { font-size: 11px; }
-  #project-title { font-size: 16px; }
-  .project-info { font-size: 13px; }
-  #project-desc { font-size: 14px; }
-
-  /* Bouton retour visible */
   #back-btn {
     display: inline-block;
-    font-size: 12px;
-    padding: 8px 14px;
   }
 
-  /* Colonne images : pleine largeur, scroll visible */
-  #project-media {
-    width: 100%;
-    height: auto;
-    overflow-y: visible;
-  }
+  /* ---------- IMAGES PROJET ---------- */
 
-  /* Images : hauteur proportionnelle, pas fixe */
   .project-row {
     flex-direction: column;
   }
 
-  .project-img {
-    width: 100%;
-    min-height: 0;
-    flex: none;
-  }
-
+  .project-img,
   .project-img.wide,
   .project-img.square {
-    flex: none;
     width: 100%;
+    flex: none;
   }
 
   .project-img img {
